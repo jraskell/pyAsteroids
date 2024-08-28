@@ -17,7 +17,7 @@ def main():
     Player.containers = (updateable, drawable)
     Asteroid.containers = (asteroid_group, updateable, drawable)
     AsteroidField.containers = (updateable)
-    
+
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     field = AsteroidField()
 
@@ -29,6 +29,15 @@ def main():
             entity.update(dt)
         screen.fill((0,0,0))
 
+        hit = False
+        for entity in asteroid_group:
+            if entity.hit_test(player):
+                hit = True
+
+        if hit:
+            print("Game over!")
+            return
+        
         for entity in drawable:
             entity.draw(screen)
 
