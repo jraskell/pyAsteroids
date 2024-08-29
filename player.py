@@ -1,5 +1,6 @@
 from circleshape import *
 from constants import *
+from pewpew import *
 
 class Player(CircleShape):
 
@@ -17,6 +18,11 @@ class Player(CircleShape):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
 
+    def shoot(self):
+        shot = PewPew(self.position.x, self.position.y)
+        vel = pygame.Vector2(0,1).rotate(self.rotation)
+        shot.velocity = vel * PLAYER_SHOOT_SPEED
+        
     def update(self, dt):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
@@ -27,6 +33,8 @@ class Player(CircleShape):
             self.move(dt)
         if keys[pygame.K_s]:
             self.move(dt * -1)
+        if keys[pygame.K_SPACE]:
+            self.shoot()
 
     # in the player class
     def triangle(self):
