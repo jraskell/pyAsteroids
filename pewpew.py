@@ -5,7 +5,9 @@ class PewPew(CircleShape):
 
     def __init__(self, x, y):
         super().__init__(x, y, PEWPEW_RADIUS)
-    
+        for c in PewPew.containers:
+            c.add(self)
+            
     def update(self, dt):
         self.position += self.velocity * dt
 

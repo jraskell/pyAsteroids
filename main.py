@@ -19,7 +19,7 @@ def main():
     Player.containers = (updateable, drawable)
     Asteroid.containers = (asteroid_group, updateable, drawable)
     AsteroidField.containers = (updateable)
-    PewPew.containers = (updateable, drawable)
+    PewPew.containers = (pewpew_group, updateable, drawable)
 
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     field = AsteroidField()
@@ -34,9 +34,13 @@ def main():
 
         hit = False
         for entity in asteroid_group:
+            for pew in pewpew_group:
+                if entity.hit_test(pew):
+                    entity.kill()
+                    pew.kill()
             if entity.hit_test(player):
                 hit = True
-
+                
         if hit:
             print("Game over!")
             return
