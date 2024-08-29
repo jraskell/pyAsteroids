@@ -36,7 +36,7 @@ def main():
         for entity in asteroid_group:
             for pew in pewpew_group:
                 if entity.hit_test(pew):
-                    entity.kill()
+                    entity.split()
                     pew.kill()
             if entity.hit_test(player):
                 hit = True
